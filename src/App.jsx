@@ -4,8 +4,9 @@ import style from './App.module.css'
 
 function App() {
   return (
-    <div className="container flex justify-center min-h-screen p-4 mx-auto">
+    <div className="container flex flex-col min-h-screen gap-8 p-4 mx-auto">
       <a
+        className="block mx-auto"
         href="https://theroadtoenterprise.com"
         target="_blank"
         rel="noreferrer"
