@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from './logo.png'
-import './App.css'
+import style from './App.module.css'
 
 function App() {
   return (

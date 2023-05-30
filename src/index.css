@@ -36,6 +36,7 @@ h3 {
 h4 {
   @apply text-xl;
 }
+
 h5,
 h6 {
   @apply text-lg;
