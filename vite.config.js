@@ -16,7 +16,7 @@ export default defineConfig({
         lintCommand: 'eslint "./src/**/*.{js,jsx}"',
       },
       stylelint: {
-        lintCommand: 'stylelint **/*.css **/*.scss',
+        lintCommand: 'stylelint "./**/*.{css,scss,sass}"',
       },
     }),
   ],
