@@ -2,7 +2,7 @@ import { fetchCat, fetchDog } from '@/api/animalApi'
 import { useEffect, useState } from 'react'
 
 const useFetchDog = () => {
-  const [dog, setDog] = useState<string>()
+  const [dog, setDog] = useState()
   const initFetchDog = async () => {
     const response = await fetchDog()
     setDog(response.data.message)
@@ -15,7 +15,7 @@ const useFetchDog = () => {
 }
 
 const useFetchCat = () => {
-  const [cat, setCat] = useState<string>()
+  const [cat, setCat] = useState()
   const initFetchCat = async () => {
     const response = await fetchCat()
     setCat(response.data?.[0].url)
@@ -47,26 +47,26 @@ const useFetchAnimals = () => {
   }
 }
 
-function App() {
+function AnimalExample() {
   const { dog, cat, fetchAnimals } = useFetchAnimals()
   return (
-    <div className="my-8 mx-auto max-w-2xl">
+    <div className="max-w-2xl mx-auto my-8">
       <div className="flex gap-8">
         <div className="w-1/2">
           {cat ? (
-            <img className="h-64 w-full object-cover" src={cat} alt="Cat" />
+            <img className="object-cover w-full h-64" src={cat} alt="Cat" />
           ) : null}
         </div>
         <div className="w-1/2">
           {dog ? (
-            <img className="h-64 w-full object-cover" src={dog} alt="Dog" />
+            <img className="object-cover w-full h-64" src={dog} alt="Dog" />
           ) : null}
         </div>
       </div>
 
       <button
         onClick={fetchAnimals}
-        className="mt-4 bg-blue-800 text-blue-100 p-4"
+        className="p-4 mt-4 text-blue-100 bg-blue-800"
       >
         Fetch animals
       </button>
@@ -74,4 +74,4 @@ function App() {
   )
 }
 
-export default App
+export default AnimalExample
