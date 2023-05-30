@@ -1,4 +1,4 @@
-import { fetchCat, fetchDog } from '@/api/animalApi'
+import { fetchCat, fetchDog } from '@/api/animal.api.js'
 import { useEffect, useState } from 'react'
 
 const useFetchDog = () => {
