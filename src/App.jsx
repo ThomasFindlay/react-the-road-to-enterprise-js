@@ -1,6 +1,6 @@
 import style from './App.module.css'
 import AnimalExample from '@/components/AnimalExample.jsx'
-import Logo from './components/Logo'
+import Logo from './components/Logo.jsx'
 
 function App() {
   return (
