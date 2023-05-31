@@ -1,11 +1,5 @@
-import axios, { AxiosInstance, AxiosPromise, Cancel } from 'axios'
-import {
-  ApiRequestConfig,
-  WithAbordFn,
-  ApiExecutor,
-  ApiExecutorArgs,
-  ApiError,
-} from './api.types'
+import axios from 'axios'
+
 // Default config for the axios instance
 const axiosParams = {
   // Set different base URL based on the environment
@@ -16,32 +10,37 @@ const axiosParams = {
 // Create axios instance with default params
 const axiosInstance = axios.create(axiosParams)
 
-const didAbort = (error: unknown): error is Cancel & { aborted: boolean } =>
-  axios.isCancel(error)
+export const didAbort = (error) => axios.isCancel(error)
 
-const getCancelSource = () => axios.CancelToken.source()
+export const isApiError = (error) => {
+  return axios.isAxiosError(error)
+}
 
-const withAbort = <T>(fn: WithAbordFn) => {
-  const executor: ApiExecutor<T> = async (...args: ApiExecutorArgs) => {
-    const originalConfig = args[args.length - 1] as ApiRequestConfig
+const withAbort = (fn) => {
+  const executor = async (...args) => {
+    const originalConfig = args[args.length - 1]
     // Extract abort property from the config
-    const { abort, ...config } = originalConfig
+    const { abort: setAbortFn, ...config } = originalConfig
 
     // Create cancel token and abort method only if abort
     // function was passed
-    if (typeof abort === 'function') {
-      const { cancel, token } = getCancelSource()
-      config.cancelToken = token
-      abort(cancel)
+    if (typeof setAbortFn === 'function') {
+      // const { cancel, token } = getCancelSource()
+      const abortController = new AbortController()
+      // abortController.
+      config.signal = abortController.signal
+      setAbortFn(() => {
+        abortController.abort()
+      })
     }
 
     try {
       if (args.length > 2) {
         const [url, body] = args
-        return await fn<T>(url, body, config)
+        return await fn(url, body, config)
       } else {
         const [url] = args
-        return await fn<T>(url, config)
+        return await fn(url, config)
       }
     } catch (error) {
       // Add "aborted" property to the error if the request was cancelled
@@ -56,14 +55,14 @@ const withAbort = <T>(fn: WithAbordFn) => {
   return executor
 }
 
-const withLogger = async <T>(promise: AxiosPromise<T>) =>
-  promise.catch((error: ApiError) => {
+const withLogger = async (promise) =>
+  promise.catch((error) => {
     /*
     Always log errors in dev environment
     if (process.env.NODE_ENV !== 'development') throw error      
   */
     // Log error only if VUE_APP_DEBUG_API env is set to true
-    if (!process.env.REACT_APP_DEBUG_API) throw error
+    if (!import.meta.env.VITE_APP_DEBUG_API) throw error
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
@@ -86,18 +85,17 @@ const withLogger = async <T>(promise: AxiosPromise<T>) =>
   })
 
 // Main api function
-const api = (axios: AxiosInstance) => {
+const api = (axios) => {
   return {
-    get: <T>(url: string, config: ApiRequestConfig = {}) =>
-      withLogger<T>(withAbort<T>(axios.get)(url, config)),
-    delete: <T>(url: string, config: ApiRequestConfig = {}) =>
-      withLogger<T>(withAbort<T>(axios.delete)(url, config)),
-    post: <T>(url: string, body: unknown, config: ApiRequestConfig = {}) =>
-      withLogger<T>(withAbort<T>(axios.post)(url, body, config)),
-    patch: <T>(url: string, body: unknown, config: ApiRequestConfig = {}) =>
-      withLogger<T>(withAbort<T>(axios.patch)(url, body, config)),
-    put: <T>(url: string, body: unknown, config: ApiRequestConfig = {}) =>
-      withLogger<T>(withAbort<T>(axios.put)(url, body, config)),
+    get: (url, config = {}) => withLogger(withAbort(axios.get)(url, config)),
+    delete: (url, config = {}) => withLogger(withAbort(axios.get)(url, config)),
+    post: (url, body, config = {}) =>
+      withLogger(withAbort(axios.post)(url, body, config)),
+    patch: (url, body, config = {}) =>
+      withLogger(withAbort(axios.post)(url, body, config)),
+    put: (url, body, config = {}) =>
+      withLogger(withAbort(axios.post)(url, body, config)),
   }
 }
+
 export default api(axiosInstance)
