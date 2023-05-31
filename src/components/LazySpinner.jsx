@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
-interface Props {
-  show: boolean
-  delay?: number
-}
-
-const LazySpinner = (props: Props) => {
+const LazySpinner = (props) => {
   const { show = false, delay = 0 } = props
   const [showSpinner, setShowSpinner] = useState(false)
 
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>
+    let timeout
     if (!show) {
       setShowSpinner(false)
       return
@@ -49,6 +45,11 @@ const LazySpinner = (props: Props) => {
       ></path>
     </svg>
   ) : null
+}
+
+LazySpinner.propTypes = {
+  show: PropTypes.bool,
+  delay: PropTypes.number,
 }
 
 export default LazySpinner

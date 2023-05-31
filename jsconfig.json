@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "test-utils": ["src/helpers/test-utils.jsx"]
+    }
+  }
+}
