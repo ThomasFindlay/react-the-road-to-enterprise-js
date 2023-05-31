@@ -5,7 +5,7 @@ import AnimalExampleWithUseApi from '@/components/AnimalExampleWithUseApi'
 
 function App() {
   return (
-    <div className="max-w-6xl mx-auto my-8 text-center App">
+    <div className="max-w-6xl mx-auto my-8 text-center">
       <h1>React - The Road To Enterprise</h1>
       <AnimalExampleWithApiStates />
       <AnimalExampleWithApiStatesConstants />
