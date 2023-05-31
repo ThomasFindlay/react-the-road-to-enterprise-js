@@ -1,18 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import type { Canceler } from '@/api/api.types'
-import { Meal, searchMeals } from '@/api/mealApi'
+import { searchMeals } from '@/api/meal.api'
 import { toast } from 'react-toastify'
 import { didAbort } from '@/api/api'
 
-type AbortRef = {
-  abort?: Canceler
-}
-
 const useFetchMeals = () => {
-  const [meals, setMeals] = useState<Meal[]>([])
-  const abortRef = useRef<AbortRef>({})
+  const [meals, setMeals] = useState([])
+  const abortRef = useRef({})
 
-  const handleQuoteError = (error: unknown) => {
+  const handleQuoteError = (error) => {
     if (didAbort(error)) {
       toast.error('Request aborted!')
     } else {
@@ -20,7 +15,7 @@ const useFetchMeals = () => {
     }
   }
 
-  const fetchMeals = async (query: string) => {
+  const fetchMeals = async (query) => {
     try {
       // Abort the previous request if there was one
       abortRef.current.abort?.()
