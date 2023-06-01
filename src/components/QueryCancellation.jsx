@@ -1,9 +1,9 @@
-import { fetchTopQuotes } from '@/api/quoteApi'
+import { fetchTopQuotes } from '@/api/quote.api'
 import { useState } from 'react'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
-const QueryCancellationWithAbortSignal = () => {
+const QueryCancellation = () => {
   const [shouldAbort, setShouldAbort] = useState(true)
   const queryClient = useQueryClient()
   const {
@@ -11,39 +11,34 @@ const QueryCancellationWithAbortSignal = () => {
     isSuccess,
     isLoading,
     isError,
-  } = useQuery(
-    'top-aborted-quotes-abort-controller',
-    ({ signal }) => {
-      return fetchTopQuotes({
-        signal,
-      }).catch((error) => {
+  } = useQuery(['top-aborted-quotes'], ({ signal }) => {
+    return fetchTopQuotes({
+      signal,
+    })
+      .then((res) => {
+        toast.success('QueryCancellation: Quotes fetched')
+        return res
+      })
+      .catch((error) => {
         if (error.aborted) {
+          console.log('check aborted show toast', error)
           toast.error('Request aborted')
-          return
         }
         throw error
       })
-    },
-    {
-      refetchOnWindowFocus: false,
-      enabled: false,
-    }
-  )
+  })
 
   const onFetchQuotes = () => {
-    queryClient.refetchQueries('top-aborted-quotes-abort-controller')
+    queryClient.refetchQueries(['top-aborted-quotes'])
     setTimeout(() => {
-      shouldAbort &&
-        queryClient.cancelQueries('top-aborted-quotes-abort-controller')
+      shouldAbort && queryClient.cancelQueries(['top-aborted-quotes'])
     }, 200)
   }
 
   return (
     <div className="py-8 max-w-2xl mx-auto">
       <div>
-        <h2 className="font-bold text-2xl mb-4">
-          Query Cancellation With Abort Controller
-        </h2>
+        <h2 className="font-bold text-2xl mb-4">Query Cancellation</h2>
         <div className="mb-4">
           <label>
             <input
@@ -78,7 +73,7 @@ const QueryCancellationWithAbortSignal = () => {
                   key={quote.id}
                   className="relative p-4 text-xl italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote"
                 >
-                  <p className="mb-4">"{quote.quote}"</p>
+                  <p className="mb-4">&ldquo;{quote.quote}&rdquo;</p>
                   <cite className="flex items-center justify-center">
                     <div className="flex flex-col items-start">
                       <span className="mb-1 text-sm italic font-bold">
@@ -96,4 +91,4 @@ const QueryCancellationWithAbortSignal = () => {
   )
 }
 
-export default QueryCancellationWithAbortSignal
+export default QueryCancellation

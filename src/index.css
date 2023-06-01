@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* stylelint-disable-next-line */
 .Toastify__toast-icon {
   margin-right: 0.5rem;
 }

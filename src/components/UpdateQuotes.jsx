@@ -1,6 +1,6 @@
-import { postQuote, resetQuotes } from '@/api/quoteApi'
-import React, { useState } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { postQuote, resetQuotes } from '@/api/quote.api'
+import { useState } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
 const UpdateQuotes = () => {
@@ -8,9 +8,7 @@ const UpdateQuotes = () => {
   const queryClient = useQueryClient()
   // Quotes mutations
   const createQuoteMutation = useMutation(postQuote)
-  const resetQuotesMutation = useMutation(
-    (e: React.MouseEvent<HTMLButtonElement>) => resetQuotes()
-  )
+  const resetQuotesMutation = useMutation(resetQuotes)
 
   // Form state
   const [form, setForm] = useState({
@@ -19,7 +17,7 @@ const UpdateQuotes = () => {
   })
 
   // Update the form state on change
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e) => {
     setForm((_form) => ({
       ..._form,
       [e.target.name]: e.target.value,
@@ -27,7 +25,7 @@ const UpdateQuotes = () => {
   }
 
   // Validate the form and start create quote mutation
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     const { author, quote } = form
     if (!author || !quote) {
@@ -40,17 +38,17 @@ const UpdateQuotes = () => {
           quote: '',
           author: '',
         })
-        queryClient.invalidateQueries('top-quotes')
+        queryClient.invalidateQueries(['top-quotes'])
         toast.success('Quote created')
       },
     })
   }
 
   // Reset the quotes to their original state on the server
-  const onReset = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onReset = (e) => {
     resetQuotesMutation.mutate(e, {
       onSuccess: () => {
-        queryClient.invalidateQueries('top-quotes')
+        queryClient.invalidateQueries(['top-quotes'])
         toast.success('Quote resetted.')
       },
     })

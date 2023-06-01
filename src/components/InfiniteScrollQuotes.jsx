@@ -1,5 +1,5 @@
-import { useInfiniteQuery } from 'react-query'
-import { fetchQuotesByCursor, QuotesDataWithCursor } from '@/api/quoteApi'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { fetchQuotesByCursor } from '@/api/quote.api'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
@@ -13,8 +13,8 @@ const InfiniteScrollQuotes = () => {
     isError,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteQuery<QuotesDataWithCursor>(
-    'quotes',
+  } = useInfiniteQuery(
+    ['quotes'],
     ({ pageParam = 0 }) => fetchQuotesByCursor(pageParam),
     {
       getNextPageParam: (lastPage, pages) => {
@@ -51,7 +51,7 @@ const InfiniteScrollQuotes = () => {
                       key={quote.id}
                       className="relative p-4 text-xl italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote"
                     >
-                      <p className="mb-4">"{quote.quote}"</p>
+                      <p className="mb-4">&ldquo;{quote.quote}&rdquo;</p>
                       <cite className="flex items-center justify-center">
                         <div className="flex flex-col items-start">
                           <span className="mb-1 text-sm italic font-bold">

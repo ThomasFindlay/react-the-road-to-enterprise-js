@@ -1,5 +1,5 @@
-import { useQuery } from 'react-query'
-import { fetchQuotesByPage, QuotesData } from '@/api/quoteApi'
+import { useQuery } from '@tanstack/react-query'
+import { fetchQuotesByPage } from '@/api/quote.api'
 import { useState } from 'react'
 import clsx from 'clsx'
 
@@ -12,7 +12,7 @@ const PaginatedQuotes = () => {
     isSuccess,
     isError,
     isPreviousData,
-  } = useQuery<QuotesData>(['quotes', page], () => fetchQuotesByPage(page), {
+  } = useQuery(['quotes', page], () => fetchQuotesByPage(page), {
     keepPreviousData: true,
   })
 
@@ -40,7 +40,7 @@ const PaginatedQuotes = () => {
                     key={quote.id}
                     className="relative p-4 text-xl italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote"
                   >
-                    <p className="mb-4">"{quote.quote}"</p>
+                    <p className="mb-4">&ldquo;{quote.quote}&rdquo;</p>
                     <cite className="flex items-center justify-center">
                       <div className="flex flex-col items-start">
                         <span className="mb-1 text-sm italic font-bold">

@@ -1,6 +1,5 @@
 module.exports = {
   endOfLine: 'lf',
-  jsxBracketSameLine: false,
   printWidth: 80,
   proseWrap: 'never',
   quoteProps: 'as-needed',
@@ -11,4 +10,4 @@ module.exports = {
   trailingComma: 'es5',
   useTabs: false,
   vueIndentScriptAndStyle: false,
-};
+}
