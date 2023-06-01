@@ -5,7 +5,6 @@ import UpdateQuotes from '@/components/UpdateQuotes'
 import PaginatedQuotes from '@/components/PaginatedQuotes'
 import InfiniteScrollQuotes from '@/components/InfiniteScrollQuotes'
 import QueryCancellation from './components/QueryCancellation'
-import QueryCancellationWithAbortSignal from './components/QueryCancellationWithAbortSignal'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 const queryClient = new QueryClient({
@@ -30,7 +29,6 @@ function App() {
           <PaginatedQuotes />
           <InfiniteScrollQuotes />
           <QueryCancellation />
-          <QueryCancellationWithAbortSignal />
         </div>
       </QueryClientProvider>
     </>
