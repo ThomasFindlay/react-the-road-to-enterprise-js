@@ -1,15 +1,7 @@
-import styles from './BusinessCardForm.module.css'
+import styles from './BusinessCardForm.module.css';
+import propTypes from 'prop-types';
 
-type BusinessCardFormProps = {
-  onFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  name: string
-  phoneNumber: string
-  description: string
-  address: string
-}
-
-const BusinessCardForm = (props: BusinessCardFormProps) => {
+const BusinessCardForm = (props) => {
   const {
     name,
     phoneNumber,
@@ -17,23 +9,23 @@ const BusinessCardForm = (props: BusinessCardFormProps) => {
     address,
     onInputChange,
     onFileUpload,
-  } = props
+  } = props;
 
   return (
-    <div className="shadow-md p-8">
-      <h2 className="text-2xl font-semibold mb-4">Business Card Form</h2>
+    <div className='p-8 shadow-md'>
+      <h2 className='mb-4 text-2xl font-semibold'>Business Card Form</h2>
       <form>
         <div className={styles.formBlock}>
           <label className={styles.formLabel}>Avatar</label>
-          <input type="file" onChange={onFileUpload} />
+          <input type='file' onChange={onFileUpload} />
         </div>
 
         <div className={styles.formBlock}>
           <label className={styles.formLabel}>Name</label>
           <input
             className={styles.formInput}
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             value={name}
             onChange={onInputChange}
           />
@@ -42,8 +34,8 @@ const BusinessCardForm = (props: BusinessCardFormProps) => {
           <label className={styles.formLabel}>Description</label>
           <input
             className={styles.formInput}
-            type="text"
-            name="description"
+            type='text'
+            name='description'
             value={description}
             onChange={onInputChange}
           />
@@ -52,8 +44,8 @@ const BusinessCardForm = (props: BusinessCardFormProps) => {
           <label className={styles.formLabel}>Phone number</label>
           <input
             className={styles.formInput}
-            type="text"
-            name="phoneNumber"
+            type='text'
+            name='phoneNumber'
             value={phoneNumber}
             onChange={onInputChange}
           />
@@ -62,15 +54,24 @@ const BusinessCardForm = (props: BusinessCardFormProps) => {
           <label className={styles.formLabel}>Address</label>
           <input
             className={styles.formInput}
-            type="text"
-            name="address"
+            type='text'
+            name='address'
             value={address}
             onChange={onInputChange}
           />
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default BusinessCardForm
+BusinessCardForm.propTypes = {
+  name: propTypes.string.isRequired,
+  phoneNumber: propTypes.string.isRequired,
+  description: propTypes.string.isRequired,
+  address: propTypes.string.isRequired,
+  onInputChange: propTypes.func.isRequired,
+  onFileUpload: propTypes.func.isRequired,
+};
+
+export default BusinessCardForm;
