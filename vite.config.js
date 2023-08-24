@@ -1,33 +1,18 @@
-import { defineConfig } from "vite";
-import reactRefresh from "@vitejs/plugin-react-refresh";
-import { fileURLToPath, URL } from "url";
-import checker from "vite-plugin-checker";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fileURLToPath, URL } from 'url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: 3000,
   },
-  esbuild: {
-    jsxInject: `import React from 'react'`,
-  },
-  plugins: [
-    reactRefresh(),
-    checker({
-      overlay: true,
-      eslint: {
-        lintCommand: 'eslint "./src/**/*.{js,jsx}"',
-      },
-      stylelint: {
-        lintCommand: 'stylelint "./**/*.{css,scss,sass}"',
-      },
-    }),
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-      "test-utils": fileURLToPath(
-        new URL("./src/helpers/test-utils.jsx", import.meta.url)
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'test-utils': fileURLToPath(
+        new URL('./src/helpers/test-utils.jsx', import.meta.url)
       ),
     },
   },
@@ -42,10 +27,10 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: "jsdom",
+    environment: 'jsdom',
     coverage: {
-      reporter: ["text", "json", "html"],
+      reporter: ['text', 'json', 'html'],
     },
-    setupFiles: ["./vitest.setup.js"],
+    setupFiles: ['./vitest.setup.js'],
   },
 });
