@@ -1,28 +1,13 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'url';
-import checker from 'vite-plugin-checker';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: 3000,
   },
-  esbuild: {
-    jsxInject: `import React from 'react'`,
-  },
-  plugins: [
-    reactRefresh(),
-    checker({
-      overlay: true,
-      eslint: {
-        lintCommand: 'eslint "./src/**/*.{js,jsx}"',
-      },
-      stylelint: {
-        lintCommand: 'stylelint "./**/*.{css,scss,sass}"',
-      },
-    }),
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
