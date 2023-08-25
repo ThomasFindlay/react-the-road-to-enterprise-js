@@ -87,7 +87,7 @@ const withLogger = async (promise) =>
 const api = (axios) => {
   return {
     get: (url, config = {}) => withLogger(withAbort(axios.get)(url, config)),
-    delete: (url, config = {}) => withLogger(withAbort(axios.get)(url, config)),
+    delete: (url, config = {}) => withLogger(withAbort(axios.delete)(url, config)),
     post: (url, body, config = {}) =>
       withLogger(withAbort(axios.post)(url, body, config)),
     patch: (url, body, config = {}) =>
