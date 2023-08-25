@@ -5,7 +5,6 @@ import { useToggleState } from '@/hooks/useToggleState';
 import propTypes from 'prop-types';
 
 const [useGlobalSpinnerContext, GlobalSpinnerContext] = contextFactory();
-
 const [useGlobalSpinnerActionsContext, GlobalSpinnerActionsContext] =
   contextFactory();
 
