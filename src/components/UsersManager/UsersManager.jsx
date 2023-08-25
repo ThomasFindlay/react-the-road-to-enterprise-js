@@ -3,14 +3,17 @@ import Spinner from '../Spinner';
 import AddUsers from './components/AddUsers';
 import DisplayUsers from './components/DisplayUsers';
 import SelectedUserDetails from './components/SelectedUserDetails';
-import { fetchUsers } from './usersSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers, selectTotalUsers } from './usersSlice';
 
-const UsersManager = () => {
+const UsersManager = (props) => {
   const dispatch = useDispatch();
-  const fetchUsersStatus = useSelector((state) => state.users.fetchUsersStatus);
+  const fetchUsersStatus = useSelector((state) => {
+    return state.users.fetchUsersStatus;
+  });
+  const totalUsers = useSelector(selectTotalUsers);
 
   useEffect(() => {
+    if (totalUsers) return;
     dispatch(fetchUsers());
   }, [dispatch]);
 
