@@ -1,21 +1,25 @@
-import { useAppDispatch } from '@/store/hooks'
 import React, { useState } from 'react'
 import { addUser } from '../usersSlice'
+import { useDispatch } from 'react-redux';
 
-type AddUsersProps = {}
-
-const createId = () => '_' + Math.random().toString(36).substr(2, 9)
+const createId = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
 
 const initialState = {
   name: '',
   email: '',
 }
 
-const AddUsers = (props: AddUsersProps) => {
-  const dispatch = useAppDispatch()
+const AddUsers = (props) => {
+  const dispatch = useDispatch()
   const [form, setForm] = useState(initialState)
 
-  const onAddUser = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onAddUser = (e) => {
     e.preventDefault()
     if (!form.name || !form.email) return
     dispatch(
@@ -27,7 +31,7 @@ const AddUsers = (props: AddUsersProps) => {
     setForm(initialState)
   }
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e) => {
     setForm((state) => ({
       ...state,
       [e.target.name]: e.target.value,
