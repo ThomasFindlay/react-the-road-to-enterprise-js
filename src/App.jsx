@@ -1,13 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './App.css';
 import UsersManager from './components/UsersManager/UsersManager';
 import { fetchUsers, resetUsers } from './components/UsersManager/usersSlice';
 import { resetStore } from './store';
-import { increment } from './store/counterSlice';
 
 function App() {
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.counter.count);
   return (
     <div className='App mx-auto max-w-6xl text-center my-8'>
       <h1 className='font-semibold text-2xl'>React - The Road To Enterprise</h1>
@@ -30,12 +28,6 @@ function App() {
             onClick={() => dispatch(fetchUsers())}
           >
             Fetch users
-          </button>
-          <button
-            className='shadow px-4 py-3 bg-blue-100'
-            onClick={() => dispatch(increment())}
-          >
-            Increment Counter {count}
           </button>
         </div>
         <UsersManager />
