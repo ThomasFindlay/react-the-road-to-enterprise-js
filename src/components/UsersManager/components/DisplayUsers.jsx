@@ -1,11 +1,10 @@
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { removeUser, selectUser } from '../usersSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
-type DisplayUsersProps = {}
 
-const DisplayUsers = (props: DisplayUsersProps) => {
-  const dispatch = useAppDispatch()
-  const users = useAppSelector((state) => state.users.users)
+const DisplayUsers = (props) => {
+  const dispatch = useDispatch()
+  const users = useSelector((state) => state.users.users)
 
   return (
     <div>

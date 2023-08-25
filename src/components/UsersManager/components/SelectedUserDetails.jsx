@@ -1,10 +1,8 @@
-import { useAppSelector } from '@/store/hooks'
+import { useSelector } from 'react-redux'
 import { getSelectedUser } from '../usersSlice'
 
-type SelectedUserDetailsProps = {}
-
-const SelectedUserDetails = (props: SelectedUserDetailsProps) => {
-  const selectedUser = useAppSelector(getSelectedUser)
+const SelectedUserDetails = (props) => {
+  const selectedUser = useSelector(getSelectedUser)
   return (
     <div>
       <h2 className="font-semibold text-xl mb-4">Selected User Details</h2>
