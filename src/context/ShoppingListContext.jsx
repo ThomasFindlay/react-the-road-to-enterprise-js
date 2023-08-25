@@ -1,20 +1,17 @@
-import {
-  ShoppingListActions,
-  ShoppingListState,
-} from '@/components/ShoppingList.types'
 import React from 'react'
 import { useImmerReducer } from 'use-immer'
 import { contextFactory } from './helpers/contextFactory'
+import propTypes from 'prop-types'
 
 const [
   ShoppingListContext,
   useShoppingListContext,
   useShoppingListContextSelector,
-] = contextFactory<[ShoppingListState, React.Dispatch<ShoppingListActions>]>()
+] = contextFactory()
 
 export { useShoppingListContext, useShoppingListContextSelector }
 
-const shoppingItems: ShoppingListState = {
+const shoppingItems  = {
   newShoppingItemName: '',
   items: [
     {
@@ -33,9 +30,9 @@ const shoppingItems: ShoppingListState = {
 }
 
 const reducer = (
-  state: ShoppingListState,
-  action: ShoppingListActions
-): ShoppingListState => {
+  state,
+  action
+) => {
   switch (action.type) {
     case 'UPDATE_NEW_SHOPPING_ITEM_NAME':
       state.newShoppingItemName = action.payload
@@ -54,13 +51,7 @@ const reducer = (
   return state
 }
 
-type ShoppingListContextProviderProps = {
-  children: React.ReactNode
-}
-
-const ShoppingListContextProvider = (
-  props: ShoppingListContextProviderProps
-) => {
+const ShoppingListContextProvider = (props) => {
   const [shoppingList, dispatch] = useImmerReducer(reducer, shoppingItems)
 
   return (
@@ -68,6 +59,10 @@ const ShoppingListContextProvider = (
       {props.children}
     </ShoppingListContext.Provider>
   )
+}
+
+ShoppingListContextProvider.propTypes = {
+  children: propTypes.children
 }
 
 export default ShoppingListContextProvider
