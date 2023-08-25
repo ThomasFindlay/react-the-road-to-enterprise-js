@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   counter: counterReducer,
 })
 
-const appReducer: typeof rootReducer = (state, action) => {
+const appReducer = (state, action) => {
   if (action.type === resetStore.type) {
     return rootReducer(undefined, action)
   }
@@ -32,7 +32,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-}
+};
 
 const persistedReducer = persistReducer(persistConfig, appReducer)
 
@@ -44,9 +44,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-})
+});
 
-export const persistor = persistStore(store)
-
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export const persistor = persistStore(store);
