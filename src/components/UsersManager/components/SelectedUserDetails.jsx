@@ -1,4 +1,4 @@
-import { useSelector } from '@/store/hooks';
+import { useSelector } from 'react-redux';
 import { getSelectedUser, useFetchUsersQuery } from '../usersSlice';
 
 const SelectedUserDetails = (props) => {

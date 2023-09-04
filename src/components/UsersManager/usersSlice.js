@@ -1,6 +1,5 @@
 import { listUsers, createUser, deleteUser } from '@/api/user.api';
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from './UsersManager.types';
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const initialState = {
