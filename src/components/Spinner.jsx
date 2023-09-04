@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import propTypes from 'prop-types';
 
 const SIZES = {
   xs: 'w-2 h-2',
@@ -35,6 +36,11 @@ const Spinner = (props) => {
       </svg>
     </div>
   ) : null;
+};
+
+Spinner.propTypes = {
+  show: propTypes.bool.isRequired,
+  size: propTypes.oneOf(Object.keys(SIZES)),
 };
 
 export default Spinner;
