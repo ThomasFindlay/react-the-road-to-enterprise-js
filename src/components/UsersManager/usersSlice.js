@@ -1,6 +1,6 @@
 import { listUsers, createUser, deleteUser } from '@/api/user.api';
 import { createSlice } from '@reduxjs/toolkit';
-import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 const initialState = {
   selectedUserId: null,
@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export const usersApiSlice = createApi({
-  baseQuery: fakeBaseQuery(),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
     fetchUsers: builder.query({
