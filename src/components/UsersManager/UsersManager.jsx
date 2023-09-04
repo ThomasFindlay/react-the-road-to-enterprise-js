@@ -1,27 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import Spinner from '../Spinner';
 import AddUsers from './components/AddUsers';
 import DisplayUsers from './components/DisplayUsers';
 import SelectedUserDetails from './components/SelectedUserDetails';
-import { fetchUsers, selectTotalUsers } from './usersSlice';
+import { useFetchUsersQuery } from './usersSlice';
 
 const UsersManager = (props) => {
-  const dispatch = useDispatch();
-  const fetchUsersStatus = useSelector((state) => {
-    return state.users.fetchUsersStatus;
-  });
-  const totalUsers = useSelector(selectTotalUsers);
-
-  useEffect(() => {
-    if (totalUsers) return;
-    dispatch(fetchUsers());
-  }, [dispatch]);
+  const {
+    data: users,
+    isError: isFetchUsersError,
+    isLoading: isFetchUsersPending,
+    isSuccess: isFetchUsersSuccess,
+  } = useFetchUsersQuery();
 
   return (
     <div className='container py-8 mx-auto'>
-      {fetchUsersStatus === 'PENDING' ? <Spinner show /> : null}
-      {fetchUsersStatus === 'SUCCESS' ? (
+      {isFetchUsersPending ? <Spinner show /> : null}
+      {isFetchUsersSuccess && users?.length ? (
         <div className='grid grid-cols-12 gap-4 px-4'>
           <div className='col-span-4'>
             <AddUsers />
@@ -34,9 +28,7 @@ const UsersManager = (props) => {
           </div>
         </div>
       ) : null}
-      {fetchUsersStatus === 'ERROR' ? (
-        <p>There was a problem fetching users</p>
-      ) : null}
+      {isFetchUsersError ? <p>There was a problem fetching users</p> : null}
     </div>
   );
 };

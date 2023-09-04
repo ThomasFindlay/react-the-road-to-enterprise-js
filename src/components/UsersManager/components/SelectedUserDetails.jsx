@@ -1,8 +1,9 @@
-import { getSelectedUser } from '../usersSlice';
 import { useSelector } from 'react-redux';
+import { getSelectedUser, useFetchUsersQuery } from '../usersSlice';
 
 const SelectedUserDetails = (props) => {
-  const selectedUser = useSelector(getSelectedUser);
+  const { data: users } = useFetchUsersQuery();
+  const selectedUser = useSelector(getSelectedUser(users));
   return (
     <div>
       <h2 className='font-semibold text-xl mb-4'>Selected User Details</h2>

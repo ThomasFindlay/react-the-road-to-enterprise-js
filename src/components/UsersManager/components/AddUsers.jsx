@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { addUser } from '../usersSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useCreateUserMutation } from '../usersSlice';
 
 const createId = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -16,23 +15,25 @@ const initialState = {
 };
 
 const AddUsers = (props) => {
-  const dispatch = useDispatch();
-  const isAddingUser = useSelector(
-    (state) => state.users.addUserStatus === 'PENDING'
-  );
   const [form, setForm] = useState(initialState);
+  const [addUser, { isLoading: isAddingUser, isSuccess: isAddUserSuccess }] =
+    useCreateUserMutation();
 
   const onAddUser = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email) return;
-    await dispatch(
-      addUser({
-        id: createId(),
-        ...form,
-      })
-    );
-    setForm(initialState);
+
+    addUser({
+      id: createId(),
+      ...form,
+    });
   };
+
+  useEffect(() => {
+    if (isAddUserSuccess) {
+      setForm(initialState);
+    }
+  }, [isAddUserSuccess]);
 
   const onChange = (e) => {
     setForm((state) => ({
