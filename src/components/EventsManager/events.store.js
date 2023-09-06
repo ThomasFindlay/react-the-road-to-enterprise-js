@@ -2,11 +2,12 @@ import { withImmer } from '@/store/middleware/withImmer';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 import { events } from './eventsData';
+import { immer } from 'zustand/middleware/immer';
 
 export const useEventsStore = createWithEqualityFn(
   devtools(
     subscribeWithSelector(
-      withImmer((set) => ({
+      immer((set) => ({
         events: [...events],
         selectEvent: (id) => {
           set({ selectedEvent: id });

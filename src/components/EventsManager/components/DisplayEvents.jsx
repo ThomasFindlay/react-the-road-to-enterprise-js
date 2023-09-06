@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useEventsStore, useUpcomingAndPastEventsStore } from '../events.store';
 import EventsTabs from './EventsTabs';
 import { shallow } from 'zustand/shallow';
+import { pick } from '@/helpers';
 
 const DisplayEvents = (props) => {
   const [eventsToShow, setEventsToShow] = useState('all');
