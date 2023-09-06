@@ -1,41 +1,45 @@
-import { withImmer } from '@/store/middleware/withImmer';
-import { createWithEqualityFn } from 'zustand/traditional';
-import { devtools, subscribeWithSelector } from 'zustand/middleware';
+import {
+  createStoreWithPersist,
+  createStoreWithPersistAndSubscribe,
+} from '../../store/helpers';
 import { events } from './eventsData';
-import { immer } from 'zustand/middleware/immer';
 
-export const useEventsStore = createWithEqualityFn(
-  devtools(
-    subscribeWithSelector(
-      immer((set) => ({
-        events: [...events],
-        selectEvent: (id) => {
-          set({ selectedEvent: id });
-        },
-        createEvent: (event) => {
-          set((state) => {
-            state.events.push(event);
-          });
-        },
-        selectedEvent: '',
-      }))
-    ),
-    {
+export const useEventsStore = createStoreWithPersistAndSubscribe(
+  (set) => ({
+    events: [...events],
+    selectEvent: (id) => {
+      set({ selectedEvent: id });
+    },
+    createEvent: (event) => {
+      set((state) => {
+        state.events.push(event);
+      });
+    },
+    selectedEvent: '',
+  }),
+  {
+    persistOptions: {
+      name: 'STORAGE_Events',
+    },
+    devtoolsOptions: {
       name: 'Events',
-    }
-  )
+    },
+  }
 );
 
-export const useUpcomingAndPastEventsStore = createWithEqualityFn(
-  devtools(
-    (set) => ({
-      pastEvents: [],
-      upcomingEvents: [],
-    }),
-    {
+export const useUpcomingAndPastEventsStore = createStoreWithPersist(
+  (set) => ({
+    pastEvents: [],
+    upcomingEvents: [],
+  }),
+  {
+    persistOptions: {
+      name: 'STORAGE_UpcomingAndPastEvents',
+    },
+    devtoolsOptions: {
       name: 'UpcomingAndPastEvents',
-    }
-  )
+    },
+  }
 );
 
 useEventsStore.subscribe(

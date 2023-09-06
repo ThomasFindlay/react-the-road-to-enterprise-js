@@ -1,7 +1,9 @@
-import { create } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
-import { withImmer } from '../middleware/withImmer';
+import { immer } from 'zustand/middleware/immer';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 export const createStoreWithSubscribe = (config, options) => {
-  return create(devtools(subscribeWithSelector(withImmer(config)), options));
+  return createWithEqualityFn(
+    devtools(subscribeWithSelector(immer(config)), options)
+  );
 };

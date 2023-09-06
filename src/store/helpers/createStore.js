@@ -1,7 +1,7 @@
-import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { withImmer } from '../middleware/withImmer';
+import { immer } from 'zustand/middleware/immer';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 export const createStore = (config, options) => {
-  return create(devtools(withImmer(config), options));
+  return createWithEqualityFn(devtools(immer(config), options));
 };

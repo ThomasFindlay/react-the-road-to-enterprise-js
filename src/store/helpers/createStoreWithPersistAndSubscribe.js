@@ -1,16 +1,19 @@
-import { create } from 'zustand';
 import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
-import { withImmer } from '../middleware/withImmer';
+import { immer } from 'zustand/middleware/immer';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 export const createStoreWithPersistAndSubscribe = (
   config,
-  persistOptions,
-  options
+  options = {
+    persistOptions: {},
+    devtoolsOptions: {},
+  }
 ) => {
-  return create(
+  const { persistOptions, devtoolsOptions } = options;
+  return createWithEqualityFn(
     devtools(
-      subscribeWithSelector(persist(withImmer(config), persistOptions)),
-      options
+      subscribeWithSelector(persist(immer(config), persistOptions)),
+      devtoolsOptions
     )
   );
 };
