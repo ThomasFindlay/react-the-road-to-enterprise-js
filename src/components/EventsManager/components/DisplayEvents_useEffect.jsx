@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import shallow from 'zustand/shallow';
 import { useEventsStore } from '../events.store';
 import EventsTabs from './EventsTabs';
 
@@ -30,13 +29,8 @@ const DisplayEvents = (props) => {
   const [eventsToShow, setEventsToShow] = useState('all');
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
-  const { allEvents, selectEvent } = useEventsStore(
-    (state) => ({
-      allEvents: state.events,
-      selectEvent: state.selectEvent,
-    }),
-    shallow
-  );
+  const allEvents = useEventsStore((store) => store.events);
+  const selectEvent = useEventsStore((store) => store.selectEvent);
 
   useEffect(() => {
     const { upcomingEvents, pastEvents } =

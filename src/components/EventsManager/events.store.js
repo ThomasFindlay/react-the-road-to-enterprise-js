@@ -1,9 +1,9 @@
 import { withImmer } from '@/store/middleware/withImmer';
-import create from 'zustand';
+import { createWithEqualityFn } from 'zustand/traditional';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 import { events } from './eventsData';
 
-export const useEventsStore = create(
+export const useEventsStore = createWithEqualityFn(
   devtools(
     subscribeWithSelector(
       withImmer((set) => ({
@@ -25,7 +25,7 @@ export const useEventsStore = create(
   )
 );
 
-export const useUpcomingAndPastEventsStore = create(
+export const useUpcomingAndPastEventsStore = createWithEqualityFn(
   devtools(
     (set) => ({
       pastEvents: [],
