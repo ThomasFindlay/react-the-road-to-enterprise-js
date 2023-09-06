@@ -4,20 +4,18 @@ import { events } from './eventsData';
 
 export const useEventsStore = createWithEqualityFn(
   devtools(
-    subscribeWithSelector(
-      (set) => ({
-        events: [...events],
-        selectEvent: (id) => {
-          set({ selectedEvent: id });
-        },
-        createEvent: (event) => {
-          set((state) => {
-            events: [...state.events, event],
-          });
-        },
-        selectedEvent: '',
-      })
-    ),
+    subscribeWithSelector((set) => ({
+      events: [...events],
+      selectEvent: (id) => {
+        set({ selectedEvent: id });
+      },
+      createEvent: (event) => {
+        set((state) => ({
+          events: [...state.events, event],
+        }));
+      },
+      selectedEvent: '',
+    })),
     {
       name: 'Events',
     }
@@ -35,7 +33,6 @@ export const useUpcomingAndPastEventsStore = create(
     }
   )
 );
-
 
 useEventsStore.subscribe(
   (state) => state.events,
