@@ -22,7 +22,7 @@ export const useEventsStore = createWithEqualityFn(
   )
 );
 
-export const useUpcomingAndPastEventsStore = create(
+export const useUpcomingAndPastEventsStore = createWithEqualityFn(
   devtools(
     (set) => ({
       pastEvents: [],
