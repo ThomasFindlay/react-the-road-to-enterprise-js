@@ -5,7 +5,7 @@
     "test:e2e:run": "start-server-and-test start http-get://localhost:3000 cypress:run",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"cd server && npm run start\"",
     "build": "vite build",
     "serve": "vite preview",
     "prettier:fix": "prettier --config ./prettier.config.cjs --write ./src/**/*.{css,scss,js,jsx} ",
