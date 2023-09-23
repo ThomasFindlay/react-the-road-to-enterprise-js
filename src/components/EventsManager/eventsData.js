@@ -1,6 +1,7 @@
-export const createEventDate = (days = 10) => {
+export const createEventDate = (days = 10, hours = 0) => {
   let date = new Date();
   date.setDate(date.getDate() + days);
+  date.setHours(date.getHours() + hours);
   let day = date.getDate();
   if (day < 10) {
     day = `0${day}`;
