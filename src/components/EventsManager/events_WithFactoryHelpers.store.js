@@ -18,10 +18,12 @@ export const useEventsStore = createStoreWithPersistAndSubscribe(
     selectedEvent: '',
   }),
   {
-    name: 'STORAGE_Events',
-  },
-  {
-    name: 'Events',
+    persistOptions: {
+      name: 'STORAGE_Events',
+    },
+    devtoolsOptions: {
+      name: 'Events',
+    },
   }
 );
 
@@ -31,10 +33,12 @@ export const useUpcomingAndPastEventsStore = createStoreWithPersist(
     upcomingEvents: [],
   }),
   {
-    name: 'STORAGE_UpcomingAndPastEvents',
-  },
-  {
-    name: 'UpcomingAndPastEvents',
+    persistOptions: {
+      name: 'STORAGE_UpcomingAndPastEvents',
+    },
+    devtoolsOptions: {
+      name: 'UpcomingAndPastEvents',
+    },
   }
 );
 

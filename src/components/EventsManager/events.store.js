@@ -1,45 +1,37 @@
-import {
-  createStoreWithPersist,
-  createStoreWithPersistAndSubscribe,
-} from '../../store/helpers';
+import { createWithEqualityFn } from 'zustand/traditional';
+import { devtools, subscribeWithSelector } from 'zustand/middleware';
 import { events } from './eventsData';
 
-export const useEventsStore = createStoreWithPersistAndSubscribe(
-  (set) => ({
-    events: [...events],
-    selectEvent: (id) => {
-      set({ selectedEvent: id });
-    },
-    createEvent: (event) => {
-      set((state) => {
-        state.events.push(event);
-      });
-    },
-    selectedEvent: '',
-  }),
-  {
-    persistOptions: {
-      name: 'STORAGE_Events',
-    },
-    devtoolsOptions: {
+export const useEventsStore = createWithEqualityFn(
+  devtools(
+    subscribeWithSelector((set) => ({
+      events: [...events],
+      selectEvent: (id) => {
+        set({ selectedEvent: id });
+      },
+      createEvent: (event) => {
+        set((state) => ({
+          events: [...state.events, event],
+        }));
+      },
+      selectedEvent: '',
+    })),
+    {
       name: 'Events',
-    },
-  }
+    }
+  )
 );
 
-export const useUpcomingAndPastEventsStore = createStoreWithPersist(
-  (set) => ({
-    pastEvents: [],
-    upcomingEvents: [],
-  }),
-  {
-    persistOptions: {
-      name: 'STORAGE_UpcomingAndPastEvents',
-    },
-    devtoolsOptions: {
+export const useUpcomingAndPastEventsStore = createWithEqualityFn(
+  devtools(
+    (set) => ({
+      pastEvents: [],
+      upcomingEvents: [],
+    }),
+    {
       name: 'UpcomingAndPastEvents',
-    },
-  }
+    }
+  )
 );
 
 useEventsStore.subscribe(
