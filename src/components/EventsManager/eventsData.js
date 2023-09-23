@@ -1,14 +1,22 @@
-import type { Event } from './eventsTypes'
+export const createEventDate = (days = 10) => {
+  let date = new Date();
+  date.setDate(date.getDate() + days);
+  let day = date.getDate();
+  if (day < 10) {
+    day = `0${day}`;
+  }
+  let month = date.getMonth() + 1;
 
-export const createEventDate = (days = 10, hours = 0) => {
-  let date = new Date()
-  let day = date.getDate() + days
-  date.setDate(day)
-  date.setHours(date.getHours() + hours)
-  return new Intl.DateTimeFormat().format(date)
-}
+  if (month < 10) {
+    month = `0${month}`;
+  }
 
-export const events: Event[] = [
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+};
+
+export const events = [
   {
     id: '1',
     title: 'Football Match',
@@ -41,4 +49,4 @@ export const events: Event[] = [
     endDate: createEventDate(-15, 3),
     endTime: '23:00',
   },
-]
+];
