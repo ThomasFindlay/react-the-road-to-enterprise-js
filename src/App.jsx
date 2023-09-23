@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import EventsManager from './components/EventsManager/EventsManager'
 import './App.css'
 
