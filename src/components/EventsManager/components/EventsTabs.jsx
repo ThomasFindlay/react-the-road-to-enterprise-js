@@ -1,19 +1,12 @@
-import clsx from 'clsx'
+import clsx from 'clsx';
 
-export type EventTab = 'all' | 'upcoming' | 'past'
+const activeTabClass = '!border-blue-500 text-blue-500';
+const tabClass = 'px-2 pb-2 border-b border-transparent';
 
-type EventsTabsProps = {
-  activeTab: EventTab
-  setActiveTab: (tab: EventTab) => void
-}
-
-const activeTabClass = '!border-blue-500 text-blue-500'
-const tabClass = 'px-2 pb-2 border-b border-transparent'
-
-const EventsTabs = (props: EventsTabsProps) => {
-  const { activeTab, setActiveTab } = props
+const EventsTabs = (props) => {
+  const { activeTab, setActiveTab } = props;
   return (
-    <div className="border-b border-blue-100 flex gap-4">
+    <div className='border-b border-blue-100 flex gap-4'>
       <button
         className={clsx(tabClass, activeTab === 'all' && activeTabClass)}
         onClick={() => setActiveTab('all')}
@@ -33,7 +26,7 @@ const EventsTabs = (props: EventsTabsProps) => {
         Past
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default EventsTabs
+export default EventsTabs;
