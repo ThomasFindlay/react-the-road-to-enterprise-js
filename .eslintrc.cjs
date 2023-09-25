@@ -7,7 +7,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
   settings: {
@@ -23,25 +22,10 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['cypress/e2e/**.{cy,spec}.{js,ts,jsx,tsx}'],
+      files: ['cypress/e2e/**.{cy,spec}.{js,jsx}'],
       extends: ['plugin:cypress/recommended'],
     },
-    {
-      files: ['*.tsx, *.jsx'],
-      rules: {
-        '@typescript-eslint/ban-types': [
-          'error',
-          {
-            extendDefaults: true,
-            types: {
-              '{}': false,
-            },
-          },
-        ],
-      },
-    },
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -49,7 +33,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'cypress', 'prettier'],
+  plugins: ['react', 'cypress', 'prettier'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -58,7 +42,5 @@ module.exports = {
     'no-unreachable': process.env.NODE_ENV === 'production' ? 'warn' : 'error',
     'prettier/prettier': ['error', { singleQuote: true }],
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/no-unused-vars':
-      process.env.NODE_ENV === 'production' ? 'warn' : 'error',
   },
 };

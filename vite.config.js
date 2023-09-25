@@ -1,25 +1,18 @@
-/// <reference types="vitest" />
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'url';
-import eslint from 'vite-plugin-eslint';
-import StylelintPlugin from 'vite-plugin-stylelint';
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    eslint(),
-    StylelintPlugin({
-      fix: true,
-      quiet: false,
-    }),
-  ],
+  server: {
+    port: 3000,
+  },
+  plugins: [react()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       'test-utils': fileURLToPath(
-        new URL('./src/helpers/test-utils.tsx', import.meta.url)
+        new URL('./src/helpers/test-utils.jsx', import.meta.url)
       ),
     },
   },
@@ -31,13 +24,5 @@ export default defineConfig({
         // additionalData: `@import "./src/styles/variables";`,
       },
     },
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    coverage: {
-      reporter: ['text', 'json', 'html'],
-    },
-    setupFiles: ['./vitest.setup.ts'],
   },
 });

@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { useStepper } from '@/hooks/useStepper';
 import styles from './registrationForm.module.css';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type RegistrationFormProps = {};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const RegistrationForm = (props: RegistrationFormProps) => {
+const RegistrationForm = (props) => {
   const { step, goToNextStep, goToPrevStep } = useStepper();
   const [form, setForm] = useState({
     name: '',
@@ -16,16 +12,14 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     email: '',
     password: '',
   });
-  const [registerApiStatus, setRegisterApiStatus] = useState<
-    'IDLE' | 'PENDING' | 'SUCCESS' | 'ERROR'
-  >('IDLE');
+  const [registerApiStatus, setRegisterApiStatus] = useState('IDLE');
 
-  const onFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFieldChange = (e) => {
     const { name, value } = e.target;
     setForm((formState) => ({ ...formState, [name]: value }));
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
       setRegisterApiStatus('PENDING');

@@ -1,6 +1,3 @@
-/* eslint-env node */
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
@@ -8,7 +5,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    specPattern: 'cypress/**/*.{cy,spec}.{js,jsx,ts,tsx}',
+    specPattern: 'cypress/**/*.{cy,spec}.{js,jsx}',
     baseUrl: 'http://localhost:4173',
   },
 });
