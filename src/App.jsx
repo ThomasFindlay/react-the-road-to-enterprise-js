@@ -3,9 +3,9 @@ import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Spinner from './components/Spinner';
 
-const About = lazy(() => import('./views/About'));
-const Contact = lazy(() => import('./views/Contact'));
-const Home = lazy(() => import('./views/Home'));
+import About from './views/About';
+import Contact from './views/Contact';
+import Home from './views/Home';
 
 function App() {
   return (
