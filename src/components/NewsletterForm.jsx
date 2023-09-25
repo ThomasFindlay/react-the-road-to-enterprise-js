@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type NewsletterFormProps = {};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const NewsletterForm = (props: NewsletterFormProps) => {
+const NewsletterForm = (props) => {
   const [form, setForm] = useState({
     name: '',
     email: '',
   });
-  const [joinNewsletterApiStatus, setJoinNewsletterApiStatus] = useState<
-    'IDLE' | 'PENDING' | 'SUCCESS' | 'ERROR'
-  >('IDLE');
+  const [joinNewsletterApiStatus, setJoinNewsletterApiStatus] =
+    useState('IDLE');
   const [error, setError] = useState('');
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     setForm((state) => ({
       ...state,
@@ -23,7 +18,7 @@ const NewsletterForm = (props: NewsletterFormProps) => {
     error && setError('');
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email) {
       setError('Please fill in all the fields.');
