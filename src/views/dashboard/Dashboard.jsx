@@ -1,8 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-type DashboardProps = {}
-
-const Dashboard = (props: DashboardProps) => {
+const Dashboard = (props) => {
   return (
     <div>
       <Outlet />

@@ -3,9 +3,8 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import styles from './dashboardLayout.module.css'
-type DashboardLayoutProps = {}
 
-const DashboardLayout = (props: DashboardLayoutProps) => {
+const DashboardLayout = (props) => {
   return (
     <div className={styles.dashboardLayout}>
       <div className="col-span-2 row-span-1">

@@ -3,9 +3,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import styles from './authLayout.module.css'
 
-type AuthLayoutProps = {}
-
-const AuthLayout = (props: AuthLayoutProps) => {
+const AuthLayout = (props) => {
   return (
     <div className={styles.authLayout}>
       <div className="col-span-2 row-span-1">

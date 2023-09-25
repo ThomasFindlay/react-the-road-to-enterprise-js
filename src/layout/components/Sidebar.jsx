@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 
-type SidebarProps = {}
-
-const Sidebar = (props: SidebarProps) => {
+const Sidebar = (props) => {
   return (
     <div className="bg-teal-100 h-full px-6 py-4">
       <nav className="flex flex-col items-start space-y-3">
