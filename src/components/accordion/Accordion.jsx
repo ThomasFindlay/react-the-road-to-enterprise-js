@@ -1,19 +1,12 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-interface Props {
-  items: {
-    heading: string;
-    content: string;
-  }[];
-}
+import propTypes from 'prop-types';
 
-type OpenIndexes = Record<string, boolean>;
-
-const Accordion = (props: Props) => {
+const Accordion = (props) => {
   const { items } = props;
-  const [openIndexes, setOpenIndexes] = useState<OpenIndexes>({});
+  const [openIndexes, setOpenIndexes] = useState({});
 
-  const onAccordionItemHeaderClick = (index: number) => {
+  const onAccordionItemHeaderClick = (index) => {
     setOpenIndexes((state) => ({
       ...state,
       [index]: !state[index],
@@ -55,6 +48,15 @@ const Accordion = (props: Props) => {
       })}
     </div>
   );
+};
+
+Accordion.propTypes = {
+  items: propTypes.arrayOf(
+    propTypes.shape({
+      heading: propTypes.string.isRequired,
+      content: propTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Accordion;
