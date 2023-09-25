@@ -3,15 +3,9 @@ import { useEffect, useState } from 'react'
 
 import './App.css'
 
-type User = {
-  id: number
-  name: string
-  surname: string
-  email: string
-}
 
 function App() {
-  const [items, setItems] = useState<User[]>([])
+  const [items, setItems] = useState([])
 
   useEffect(() => {
     let users = []
