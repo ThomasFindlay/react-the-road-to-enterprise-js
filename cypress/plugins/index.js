@@ -1,11 +1,9 @@
-/// <reference types="cypress" />
-
 /**
  * @type {Cypress.PluginConfig}
  */
 export default (
-  on: Cypress.PluginEvents,
-  config: Cypress.PluginConfigOptions
+  on,
+  config
 ) => {
   return Object.assign({}, config, {
     fixturesFolder: 'cypress/fixtures',

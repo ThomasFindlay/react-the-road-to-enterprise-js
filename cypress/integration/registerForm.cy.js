@@ -1,19 +1,10 @@
 // Helper to go to the next step
 const goNext = () => cy.findByText('Next').click();
 
-type UserData = {
-  name: string;
-  surname: string;
-  address: string;
-  city: string;
-  email: string;
-  password: string;
-};
-
 describe('User Registration', () => {
   beforeEach(() => {
-    // Load fixture for each test
     cy.fixture('userRegistrationData.json').as('userData');
+    // Load fixture for each test
   });
 
   it('Visits the page', () => {
@@ -22,7 +13,7 @@ describe('User Registration', () => {
   });
 
   it('Fill in the form', () => {
-    cy.get<UserData>('@userData').then((user) => {
+    cy.get('@userData').then((user) => {
       cy.findByLabelText('Name').type(user.name);
       cy.findByLabelText('Surname').type(user.surname);
       goNext();
@@ -44,7 +35,7 @@ describe('User Registration', () => {
     // Wait for the post request and get the request object
     cy.wait('@postUser').then(({ request }) => {
       // Get user
-      cy.get<UserData>('@userData').then((user) => {
+      cy.get('@userData').then((user) => {
         // Check if request body matches with user fixture
         expect(JSON.parse(request.body)).to.eql(user);
       });
