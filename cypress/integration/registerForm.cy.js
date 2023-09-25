@@ -3,8 +3,8 @@ const goNext = () => cy.findByText('Next').click();
 
 describe('User Registration', () => {
   beforeEach(() => {
-    cy.fixture('userRegistrationData.json').as('userData');
     // Load fixture for each test
+    cy.fixture('userRegistrationData.json').as('userData');
   });
 
   it('Visits the page', () => {
