@@ -1,7 +1,5 @@
-import Permission from '@/components/common/permission/Permission'
-import { useState } from 'react'
-
-type HomeProps = {}
+import Permission from '@/components/common/permission/Permission';
+import { useState } from 'react';
 
 const commentsData = [
   {
@@ -19,14 +17,14 @@ const commentsData = [
     authorId: '1',
     message: 'I also was posted by user 1, so I can be edited',
   },
-]
+];
 
-const Home = (props: HomeProps) => {
-  const [comments, setComments] = useState(commentsData)
+const Home = (props) => {
+  const [comments, setComments] = useState(commentsData);
 
   return (
-    <div className="max-w-[40rem] mx-auto">
-      <h1 className="text-2xl font-bold my-4">Comments</h1>
+    <div className='max-w-[40rem] mx-auto'>
+      <h1 className='text-2xl font-bold my-4'>Comments</h1>
 
       <div>
         {/* Determine if a user should have access to the comments section */}
@@ -34,11 +32,11 @@ const Home = (props: HomeProps) => {
           roles={['logged-in']}
           noAccess={<p>You must be logged in to see this content.</p>}
         >
-          <div className="space-y-3">
+          <div className='space-y-3'>
             {comments.map((comment) => {
               return (
                 <div
-                  className="shadow border p-3 flex justify-between"
+                  className='shadow border p-3 flex justify-between'
                   key={comment.id}
                 >
                   <span>{comment.message}</span>
@@ -50,13 +48,13 @@ const Home = (props: HomeProps) => {
                     <a>Edit</a>
                   </Permission>
                 </div>
-              )
+              );
             })}
           </div>
         </Permission>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
