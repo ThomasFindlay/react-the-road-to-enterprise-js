@@ -1,5 +1,5 @@
 const Register = (props) => {
-  return <div>Register</div>
-}
+  return <div>Register</div>;
+};
 
-export default Register
+export default Register;

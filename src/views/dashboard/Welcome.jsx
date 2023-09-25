@@ -1,5 +1,5 @@
 const Welcome = (props) => {
-  return <div>Welcome</div>
-}
+  return <div>Welcome</div>;
+};
 
-export default Welcome
+export default Welcome;
