@@ -5,16 +5,6 @@ import styles from '../Alert.module.css';
 import { ErrorIcon, InfoIcon, SuccessIcon } from '../components/icons';
 import CloseIcon from '../components/icons/CloseIcon';
 
-export const alertPropTypes = {
-  show: propTypes.bool.isRequired,
-  variant: propTypes.oneOf(['success', 'info', 'error']).isRequired,
-  showIcon: propTypes.bool,
-  headerText: propTypes.string,
-  text: propTypes.string,
-  children: propTypes.node,
-  onClose: propTypes.func,
-};
-
 const ICONS = {
   success: SuccessIcon,
   info: InfoIcon,
@@ -64,6 +54,14 @@ const Alert = (props) => {
   ) : null;
 };
 
-Alert.propTypes = alertPropTypes;
+Alert.propTypes = {
+  show: propTypes.bool.isRequired,
+  variant: propTypes.oneOf(['success', 'info', 'error']).isRequired,
+  showIcon: propTypes.bool,
+  headerText: propTypes.string,
+  text: propTypes.string,
+  children: propTypes.node,
+  onClose: propTypes.func,
+};
 
 export default Alert;

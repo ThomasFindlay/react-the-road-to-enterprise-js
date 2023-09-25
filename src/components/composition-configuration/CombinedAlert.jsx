@@ -6,7 +6,6 @@ import {
   AlertHeading,
   AlertIcon,
 } from './composition/Alert';
-import { alertPropTypes } from './configuration/Alert';
 
 const CombinedAlert = (props) => {
   const {
@@ -35,6 +34,14 @@ const CombinedAlert = (props) => {
   ) : null;
 };
 
-CombinedAlert.propTypes = alertPropTypes;
+CombinedAlert.propTypes = {
+  show: propTypes.bool.isRequired,
+  variant: propTypes.oneOf(['success', 'info', 'error']).isRequired,
+  showIcon: propTypes.bool,
+  headerText: propTypes.string,
+  text: propTypes.string,
+  children: propTypes.node,
+  onClose: propTypes.func,
+};
 
 export default CombinedAlert;
