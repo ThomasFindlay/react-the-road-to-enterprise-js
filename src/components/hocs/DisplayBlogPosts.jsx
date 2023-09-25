@@ -9,7 +9,7 @@ const DisplayBlogPosts = (props) => {
   const start = (page - 1) * POSTS_PER_PAGE;
   const end = page * POSTS_PER_PAGE;
   const currentPosts = posts.slice(start, end);
-  console.log('props', props);
+
   const onNextPage = () => {
     const nextEnd = (page + 1) * POSTS_PER_PAGE;
     if (nextEnd > posts.length) return;
