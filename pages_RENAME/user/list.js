@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import { User } from "../../types/user";
 
-type DisplayUsersProps = {};
-
-const DisplayUsers = (props: DisplayUsersProps) => {
-  const [users, setUsers] = useState<User[]>([]);
+const DisplayUsers = props => {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const usersData: User[] = await fetch("/api/user/list").then(res =>
-        res.json()
-      );
+      const usersData = await fetch("/api/user/list").then(res => res.json());
       setUsers(usersData);
     })();
   }, []);
+
   return (
     <div style={{ maxWidth: 600, margin: "0 auto" }}>
       <h1>DisplayUsers</h1>

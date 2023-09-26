@@ -9,5 +9,5 @@
 .nav {
   display: flex;
   justify-content: space-around;
-  width: 12rem;
+  gap: 1rem;
 }

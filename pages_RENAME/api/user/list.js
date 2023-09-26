@@ -1,7 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { User } from "../../../types/user";
-
-const users: User[] = [
+const users = [
   {
     id: 1,
     name: "Thomas",
@@ -19,9 +16,6 @@ const users: User[] = [
   },
 ];
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<typeof users>
-) {
+export default function handler(req, res) {
   res.status(200).json(users);
 }

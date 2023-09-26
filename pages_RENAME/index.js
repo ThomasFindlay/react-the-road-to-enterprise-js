@@ -1,19 +1,6 @@
-import type { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 
-type Post = {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-};
-
-type HomeProps = {
-  children?: React.ReactNode;
-  posts?: Post[];
-};
-
-const Home: NextPage<HomeProps> = props => {
+const Home = props => {
   return (
     <div style={{ maxWidth: 600, margin: "0 auto" }}>
       <h1>Posts</h1>
@@ -29,9 +16,7 @@ const Home: NextPage<HomeProps> = props => {
   );
 };
 
-export const getStaticProps: GetStaticProps<{
-  posts: Post[];
-}> = async context => {
+export const getStaticProps = async context => {
   const posts = await fetch("https://jsonplaceholder.typicode.com/posts").then(
     res => res.json()
   );

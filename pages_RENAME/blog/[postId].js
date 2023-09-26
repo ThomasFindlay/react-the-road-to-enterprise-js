@@ -1,24 +1,6 @@
-import {
-  GetServerSideProps,
-  GetStaticPaths,
-  GetStaticProps,
-  NextPage,
-} from "next";
 import { useRouter } from "next/router";
 
-type Post = {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-};
-
-type PostPageProps = {
-  children?: React.ReactNode;
-  post?: Post;
-};
-
-const PostPage: NextPage<PostPageProps> = props => {
+const PostPage = props => {
   const router = useRouter();
   const { postId } = router.query;
   const { post } = props;
@@ -38,7 +20,7 @@ const PostPage: NextPage<PostPageProps> = props => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps = async context => {
   const postId = context.params?.postId;
 
   if (!postId) {
@@ -47,9 +29,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     };
   }
 
-  const post = (await fetch(
+  const post = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${postId}`
-  ).then(res => res.json())) as Post;
+  ).then(res => res.json());
 
   return {
     props: {
@@ -58,14 +40,12 @@ export const getServerSideProps: GetServerSideProps = async context => {
   };
 };
 
-/**
-
 // SSG + ISR
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = (await fetch("https://jsonplaceholder.typicode.com/posts").then(
+/*
+export const getStaticPaths = async () => {
+  const posts = await fetch("https://jsonplaceholder.typicode.com/posts").then(
     res => res.json()
-  )) as Post[];
+  );
 
   return {
     paths: posts.slice(0, 10).map(post => {
@@ -79,9 +59,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<{
-  post?: Post;
-}> = async context => {
+export const getStaticProps = async context => {
   const postId = context.params?.postId;
 
   if (!postId) {
@@ -90,9 +68,9 @@ export const getStaticProps: GetStaticProps<{
     };
   }
 
-  const post = (await fetch(
+  const post = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${postId}`
-  ).then(res => res.json())) as Post;
+  ).then(res => res.json());
 
   return {
     props: {
@@ -100,8 +78,6 @@ export const getStaticProps: GetStaticProps<{
     },
     revalidate: 60,
   };
-};
-
- */
+}; */
 
 export default PostPage;
