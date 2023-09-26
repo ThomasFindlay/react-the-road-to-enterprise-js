@@ -1,0 +1,1 @@
+Next.js allows having both app and pages directories at the same time. However, there will be an error if there are page or route collisions. Therefore, the pages directory is called pages_RENAME. If you would like to test the pages dir, change the name of the app directory to something else and then pages_RENAME to pages.
