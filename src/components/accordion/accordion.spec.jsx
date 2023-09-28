@@ -19,7 +19,7 @@ const accordionData = [
 const renderAccordion = (props = {}) =>
   render(<Accordion items={accordionData} {...props} />);
 
-describe('Accordion.tsx', () => {
+describe('Accordion.jsx', () => {
   it('Accordion items have correct text', async () => {});
 
   it('Each accordion item content is hidden at the start', async () => {});
