@@ -1,4 +1,4 @@
-export const getStaticParams = async () => {
+export const generateStaticParams = async () => {
   const posts = await fetch("https://jsonplaceholder.typicode.com/posts").then(
     res => res.json()
   );
