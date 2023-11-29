@@ -5,7 +5,7 @@ export const generateStaticParams = async () => {
 
   return posts.slice(0, 10).map(post => {
     return {
-      postId: post.id,
+      postId: String(post.id),
     };
   });
 };

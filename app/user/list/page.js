@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 const BASE_URL = "http://localhost:3000";
 
 const DisplayUsers = async props => {
